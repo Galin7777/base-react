@@ -23,14 +23,16 @@ export const Counter = ({ count, setCount }) => {
   };
 
   return (
-    <div>
+    <div className={'counter'}>
       <p>
         <h1>Counter App</h1>
       </p>
       <button className={'button'}
         onClick={handleReduceCount}> minus </button>
-      <button onClick={handleAddCount}> plus </button>
-      <button onClick={() => setCount(1)}> reset </button>
+      <button className={'button'} onClick={handleAddCount}> plus </button>
+      <p>
+        <button className={'button'} onClick={() => setCount(1)}> reset </button>
+      </p>
       <p>Counter:{count}</p>
     </div>
   );
