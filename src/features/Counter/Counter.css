@@ -1,3 +1,10 @@
 .counter {
-  margin-right: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.button {
+  left: 10px;
+  position: fixed;
+  border-radius: 2px;
 }

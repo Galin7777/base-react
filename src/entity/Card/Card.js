@@ -21,14 +21,16 @@ export const Card = (props) => {
       )}
       {/* image */}
       {props.image && (
-        <img className={'cardImg'}
+        <img className={'cardImage'}
           src={props.image}
           alt={props.name}
         />
       )}
       {/* text */}
       {props.text && (
-        <p>{props.text}</p>
+        <p className='{cardText}'>
+          {props.text}
+        </p>
       )}
     </li>
   );
