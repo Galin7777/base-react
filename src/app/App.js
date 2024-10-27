@@ -51,8 +51,7 @@ export const App = (props) => {
       </div>
       {/*Todo widgets*/}
       <div>
-        <Counter name={'Todo count'}
-          count={todoCount}
+        <Tasks count={todoCount}
           setCount={setTodoCount}
         />
         <Todos todos={todos} />
