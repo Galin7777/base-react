@@ -1,4 +1,4 @@
-import './Tasks.css';
+import classes from './Tasks.module.scss';
 import { Counter, Todos } from 'features';
 
 /**
@@ -14,7 +14,7 @@ import { Counter, Todos } from 'features';
 
 export const Tasks = (props) => {
   return (
-    <div className='tasks'>
+    <div className={classes.tasks}>
       <Counter name={'Todo count'}
         count={props.count}
         setCount={props.setCount}

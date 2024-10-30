@@ -2,14 +2,25 @@
   position: relative;
   min-width: 150px;
   min-height: 150px;
-  list-style-type: none;
-}
+  background-repeat: 12px;
+  overflow: hidden;
+  color: #333333;
 
-.card h2 {
+.name {
   position: absolute;
   top: 50%;
   left: 10px;
   right: 10px;
   transform: translateY(-50%);
   font-size: 16px;
+  }
+}
+
+.image {
+  width: 100px;
+  height: 100px;object-fit: cover;
+}
+
+.text {
+  font-style: 20px;
 }

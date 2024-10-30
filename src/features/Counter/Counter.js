@@ -1,3 +1,5 @@
+import classes from './Counter.module.scss';
+
 /**
  * @typedef {import('./types').CounterProps} CounterProps
  */
@@ -23,13 +25,15 @@ export const Counter = ({ count, setCount, name }) => {
   };
 
   return (
-    <div className={'counter'}>
+    <div className={classes.counter}>
       <h1>{name}</h1>
-      <button className={'button'}
-        onClick={handleReduceCount}> minus </button>
-      <button className={'button'} onClick={handleAddCount}> plus </button>
+      <div>
+        <button className={classes.button}
+          onClick={handleReduceCount}> minus </button>
+        <button className={classes.button} onClick={handleAddCount}> plus </button>
+      </div>
       <p>
-        <button className={'button'} onClick={() => setCount(1)}> reset </button>
+        <button className={classes.button} onClick={() => setCount(1)}> reset </button>
       </p>
       <p>Counter:{count}</p>
     </div>

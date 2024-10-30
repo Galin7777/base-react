@@ -1,4 +1,4 @@
-import './Gallery.css';
+import classes from './Gallery.module.scss';
 import { Counter, Photos } from 'features';
 
 /**
@@ -14,7 +14,7 @@ import { Counter, Photos } from 'features';
 
 export const Gallery = (props) => {
   return (
-    <div className='gallery'>
+    <div className={classes.gallery}>
       <Counter name={'Photo count'}
         count={props.count}
         setCount={props.setCount}
