@@ -6,10 +6,12 @@ export type PhotoFromAPI = {
   thumbnailUrl: string;
 };
 
-export type PhotoStore = {
-  count: number;
-  photos: PhotoFromAPI[];
+export type PhotosStore = {
+  photos: PhotoFromAPI[] | [];
   isPhotosLoading: boolean;
   photosErrorMessage: string;
-  getPhotos: () => void;
+  getPhotos: (count: number) => void;
+  resetPhotos: () => void;
 };
+
+export type PhotosStateCreator = (set: Function) => PhotosStore;
