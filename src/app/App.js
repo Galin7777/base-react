@@ -1,7 +1,7 @@
-import './App.css';
+import  classes from './App.module.scss';
 import { useEffect, useState } from 'react';
-import { Counter, Photos, Todos } from 'features';
 import { API_BASE_URL } from 'shared';
+import { Gallery, Tasks } from 'widgets';
 
 /**
  * @typedef {import('./types').AppProps} AppProps
@@ -39,23 +39,21 @@ export const App = (props) => {
   }, [todoCount]);
 
   return (
-    <div className="app">
+    <div className={classes.app}>
       <h3>{props.name}</h3>
       {/*Photo widgets*/}
       <div>
-        <Counter name={'Photo count'}
-          count={photoCount}
+        <Gallery count={photoCount}
           setCount={setPhotoCount}
+          photos={photos}
         />
-        <Photos photos={photos} />
       </div>
       {/*Todo widgets*/}
       <div>
-        <Counter name={'Todo count'}
-          count={todoCount}
+        <Tasks count={todoCount}
           setCount={setTodoCount}
+          todos={todos}
         />
-        <Todos todos={todos} />
       </div>
     </div>
   );

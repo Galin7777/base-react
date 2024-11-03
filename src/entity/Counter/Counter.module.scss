@@ -1,0 +1,21 @@
+.counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.button {
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 10px;
+    color: #fff;
+    background-color: grey;
+    border-radius: 20px;
+}

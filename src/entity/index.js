@@ -1,2 +1,2 @@
-export { Counter } from '../features/Counter';
+export { Counter } from './Counter';
 export { Card } from './Card';
