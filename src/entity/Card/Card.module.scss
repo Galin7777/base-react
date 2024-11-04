@@ -1,26 +1,31 @@
-.card {
+.Card {
   position: relative;
-  min-width: 150px;
-  min-height: 150px;
-  background-repeat: 12px;
+  width: 150px;
+  height: 150px;
+  list-style: none;
   overflow: hidden;
-  color: #333333;
+}
 
 .name {
   position: absolute;
   top: 50%;
-  left: 10px;
-  right: 10px;
-  transform: translateY(-50%);
-  font-size: 10px;
-  }
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  z-index: 1;
 }
 
 .image {
-  width: 100px;
-  height: 100px;object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .text {
-  font-style: 20px;
+  font-size: 14px;
+  color: #333333;
+  margin-top: 10px;
+  text-align: center;
 }

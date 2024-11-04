@@ -1,3 +1,5 @@
+import { API_BASE_URL } from 'shared';
+
 /**
  * @typedef {import('./types').PhotosStateCreator} StateCreator
  */
@@ -15,12 +17,17 @@ export const usePhotos = create(/** @type {StateCreator} */(set) => ({
   isPhotosLoading: false,
   photosErrorMessage: '',
   getPhotos: async (count) => {
-    // Описываем логику с получением  от Апи фотографии
-    // Записываем их в хранилище с помощью set хранилище
-    // Если получили ошибку - записываеи ошибку в photosErrorMessage
+    set({ isPhotosLoading: true });
+
+    try {
+      const endPoint = `photos?_start=0&_limit=${count}`;
+      const response = await fetch(`${API_BASE_URL}/${endPoint}`);
+      const data = await response.json();
+
+      set({ photos: data, photosErrorMessage: '', isPhotosLoading: false });
+    } catch (error) {
+      set({ photosErrorMessage: 'Не удалось загрузить фотографии.', isPhotosLoading: false });
+    }
   },
   resetPhotos: () => set(() => ({ photos: [] })),
 }));
-
-
-

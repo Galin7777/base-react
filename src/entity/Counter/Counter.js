@@ -29,14 +29,31 @@ export const Counter = ({ count, setCount, name }) => {
 
   return (
     <div className={classes.counter}>
+      {/* Name */}
       <h1>{name}</h1>
       <div>
+        {/* Minus */}
         <button className={classes.button}
-          onClick={handleReduceCount}> minus </button>
-        <button className={classes.button} onClick={handleAddCount}> plus </button>
+          disabled={newMinCount}
+          onClick={handleReduceCount}
+        >
+          minus
+        </button>
+        {/* Plus */}
+        <button className={classes.button}
+          disabled={newMaxCount}
+          onClick={handleAddCount}
+        >
+          plus
+        </button>
       </div>
+      {/* Reset */}
       <p>
-        <button className={classes.button} onClick={() => setCount(1)}> reset </button>
+        <button className={classes.button}
+          onClick={() => setCount(1)}
+        >
+          reset
+        </button>
       </p>
       <p>Counter:{count}</p>
     </div>

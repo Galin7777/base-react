@@ -18,7 +18,6 @@ export const Gallery = (props) => {
   const photosStore = usePhotos();
 
   useEffect(() => {
-    console.log('Photos:', photosStore.photos);
   }, [photosStore.photos]);
 
   return (
