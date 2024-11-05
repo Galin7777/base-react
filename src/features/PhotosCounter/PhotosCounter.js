@@ -3,20 +3,22 @@ import { Counter } from 'entity';
 import { usePhotos } from 'shared/hooks';
 
 /**
- * @typedef {import('./types').CounterProps} CounterProps
+ * @typedef {import('./types').PhotosCounterProps} Props
  */
 
 /**
- * @function PhotoCounter
- * @param {CounterProps} props
+ * @function PhotosCounter
+ * @param {Props} props
  * @returns {JSX.Element}
  */
 
-export const PhotoCounter = (props) => {
-  const photosStore = usePhotos();
-  const [count, setCount] = useState();
+export const PhotosCounter = (props) => {
+  const photosState = usePhotos();
 
   return (
-    <Counter />
+    <Counter name={'Photos count'}
+      count={photosState.photoCount}
+      setCount={photosState.setPhotoCount}
+    />
   );
 };

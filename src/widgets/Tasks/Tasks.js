@@ -1,5 +1,6 @@
 import classes from './Tasks.module.scss';
-import { Counter, Todos } from 'features';
+import { Todos } from 'features';
+import { Counter } from 'entity';
 
 /**
  * @typedef {import('./types').TasksProps} TasksProps
