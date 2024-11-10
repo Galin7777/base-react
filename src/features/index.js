@@ -1,4 +1,5 @@
-export { Counter } from '../entity/Counter';
+export { PhotoCounter } from '../features/PhotoCounter';
+export { TodoCounter } from '../features/TodoCounter';
 export { Card } from '../entity';
 export { Photos } from './Photos';
-export { Todos } from './Todos';
+export { Todo } from './Todo';

@@ -1,4 +1,5 @@
 import classes from './Card.module.scss';
+import { getRandomColor } from '../../shared/utils/getRandomColor';
 
 /**
  * @typedef {import ('./types').CardProps} CardProps
@@ -12,7 +13,9 @@ import classes from './Card.module.scss';
 
 export const Card = (props) => {
   return (
-    <li className={classes.Card}>
+    <li className={classes.Card}
+      style={{ background: getRandomColor() }}
+    >
       {/* name */}
       {props.name && (
         <h2 className={classes.name}>

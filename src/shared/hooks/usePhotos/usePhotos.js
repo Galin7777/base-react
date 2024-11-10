@@ -1,26 +1,30 @@
+import { create } from 'zustand';
+import { API_BASE_URL } from 'shared';
+
 /**
- * @typedef {import('./types').PhotosStateCreator} StateCreator
+ * @typedef {import('./types').PhotoStateCreator} StateCreator
+ * @typedef {import('./types').SetterCallback} Setter
+ * @typedef {import('./types').PhotoState } State
  */
 
-import { create } from 'zustand';
-
 export const usePhotos = create(/** @type {StateCreator} */(set) => ({
-  photos: [{
-    albumId: 1,
-    id: 1,
-    title: 'title',
-    url: 'url',
-    thumbnailUrl: 'url',
-  }],
+  /* State for count */
+  photoCount: 0,
+  setPhotoCount: (photoCount) => set(/** @type {Setter}*/(state) => ({ ...state, photoCount })),
+  /* State for photos */
+  photos: [],
   isPhotosLoading: false,
   photosErrorMessage: '',
   getPhotos: async (count) => {
-    // Описываем логику с получением  от Апи фотографии
-    // Записываем их в хранилище с помощью set хранилище
-    // Если получили ошибку - записываеи ошибку в photosErrorMessage
+    try {
+      set(/** @type {Setter}*/(state) => ({ ...state, isPhotosLoading: true }));
+      const endPoint = `photos?_start=0&_limit=${count}`;
+      const response = await fetch(`${API_BASE_URL}/${endPoint}`);
+      const data = await response.json();
+      set(/** @type {Setter}*/(state) => ({ ...state, photos: data, photosErrorMessage: '', isPhotosLoading: false }));
+    } catch (error) {
+      set(/** @type {Setter}*/(state) => ({ ...state, photosErrorMessage: 'The photos could not be loaded.', isPhotosLoading: false }));
+    }
   },
-  resetPhotos: () => set(() => ({ photos: [] })),
+  resetPhotos: () => set((/** @type {Setter} */state) => ({ ...state, photos: [] })),
 }));
-
-
-

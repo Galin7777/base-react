@@ -1,33 +1,27 @@
 import classes from './Gallery.module.scss';
 import { useEffect } from 'react';
-import { Counter, Photos } from 'features';
+import { PhotoCounter, Photos } from 'features';
 import { usePhotos } from 'shared/hooks';
 
 /**
- * @typedef {import('./types').GalleryProps} GalleryProps
- */
-
-/**
  * @function Gallery
- * @param {GalleryProps} props
  * @returns {JSX.Element}
  */
 
-
-export const Gallery = (props) => {
-  const photosStore = usePhotos();
+export const Gallery = () => {
+  const photoState = usePhotos();
 
   useEffect(() => {
-    console.log('Photos:', photosStore.photos);
-  }, [photosStore.photos]);
+    const { photoCount } = photoState;
+    if (!photoState.photoCount) return;
+    console.log({ photoCount });
+    photoState.getPhotos(photoState.photoCount);
+  }, [photoState.photoCount]);
 
   return (
     <div className={classes.gallery}>
-      <Counter name={'Photo count'}
-        count={props.count}
-        setCount={props.setCount}
-      />
-      <Photos photos={props.photos} />
+      <PhotoCounter name={'Photo count'}/>
+      <Photos photos={photoState.photos} />
     </div>
   );
 };
