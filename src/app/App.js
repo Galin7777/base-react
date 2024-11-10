@@ -1,8 +1,7 @@
 import classes from './App.module.scss';
 import { useEffect } from 'react';
 import { Gallery, Tasks } from 'widgets';
-import { usePhotos } from 'shared/hooks';
-
+import { usePhotos, useTodo } from 'shared/hooks';
 
 /**
  * @typedef {import('./types').AppProps} AppProps
@@ -16,17 +15,22 @@ import { usePhotos } from 'shared/hooks';
 
 export const App = (props) => {
   const defaultCount = 4;
-  const photosState = usePhotos();
+  const photoState = usePhotos();
+  const todosState = useTodo();
 
   useEffect(() => {
-    photosState.setPhotoCount(defaultCount);
+    photoState.setPhotoCount(defaultCount);
+  }, []);
+
+  useEffect(() => {
+    todosState.setTodoCount(defaultCount);
   }, []);
 
   return (
     <div className={classes.app}>
       <h3>{props.name}</h3>
       <Gallery />
-      {/* <Tasks /> */}
+      <Tasks />
     </div>
   );
 };
