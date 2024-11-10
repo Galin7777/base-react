@@ -1,4 +1,4 @@
-import { TodosDetails } from '../../features/Todos/types';
+import { TodosDetails } from '../../features/Todo/types';
 
 export type TasksProps = {
   name?: string

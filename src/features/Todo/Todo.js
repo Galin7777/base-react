@@ -2,16 +2,16 @@ import classes from './Todos.module.scss';
 import { Card } from 'entity';
 
 /**
- * @typedef {import('./types').TodosProps} TodosProps
+ * @typedef {import('./types').TodoProps} TodoProps
  */
 
 /**
- * @function Todos
- * @param {TodosProps} props
+ * @function Todo
+ * @param {TodoProps} props
  * @returns {JSX.Element}
  */
 
-export const Todos = (props) => {
+export const Todo = (props) => {
   return (
     <ul className={classes.todos}>
       {props.todos.map((todo) =>

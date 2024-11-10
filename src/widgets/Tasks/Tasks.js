@@ -1,26 +1,27 @@
 import classes from './Tasks.module.scss';
-import { Todos } from 'features';
-import { Counter } from 'entity';
-
-/**
- * @typedef {import('./types').TasksProps} TasksProps
- */
+import { useEffect } from 'react';
+import { TodoCounter, Todo } from 'features';
+import { useTodo } from 'shared/hooks';
 
 /**
  * @function Tasks
- * @param {TasksProps} props
  * @returns {JSX.Element}
  */
 
+export const Tasks = () => {
+  const todoState = useTodo();
 
-export const Tasks = (props) => {
+  useEffect(() => {
+    const { todoCount } = todoState;
+    if (!todoState.todoCount) return;
+    console.log({ todoCount });
+    todoState.getTodos(todoState.todoCount);
+  }, [todoState.todoCount]);
+
   return (
     <div className={classes.tasks}>
-      <Counter name={'Todo count'}
-        count={props.count}
-        setCount={props.setCount}
-      />
-      <Todos todos={props.todos} />
+      <TodoCounter name={'Todo count'}/>
+      <Todo todos={todoState.todos} />
     </div>
   );
 };

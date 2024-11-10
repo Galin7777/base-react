@@ -1,6 +1,6 @@
 import classes from './Gallery.module.scss';
 import { useEffect } from 'react';
-import { PhotosCounter, Photos } from 'features';
+import { PhotoCounter, Photos } from 'features';
 import { usePhotos } from 'shared/hooks';
 
 /**
@@ -9,19 +9,19 @@ import { usePhotos } from 'shared/hooks';
  */
 
 export const Gallery = () => {
-  const photosStore = usePhotos();
+  const photoState = usePhotos();
 
   useEffect(() => {
-    const { photoCount } = photosStore;
-    if (!photosStore.photoCount) return;
+    const { photoCount } = photoState;
+    if (!photoState.photoCount) return;
     console.log({ photoCount });
-    photosStore.getPhotos(photosStore.photoCount);
-  }, [photosStore.photoCount]);
+    photoState.getPhotos(photoState.photoCount);
+  }, [photoState.photoCount]);
 
   return (
     <div className={classes.gallery}>
-      <PhotosCounter name={'Photo count'}/>
-      <Photos photos={photosStore.photos} />
+      <PhotoCounter name={'Photo count'}/>
+      <Photos photos={photoState.photos} />
     </div>
   );
 };
