@@ -1,5 +1,5 @@
 import { Counter } from 'entity';
-import { useTodo } from 'shared/hooks';
+import { useTodosStore } from 'shared/hooks';
 
 /**
  * @typedef {import('./types').TodoCounterProps} Props
@@ -12,7 +12,7 @@ import { useTodo } from 'shared/hooks';
  */
 
 export const TodoCounter = (props) => {
-  const todoState = useTodo();
+  const todoState = useTodosStore();
 
   return (
     <Counter name={'Todo count'}

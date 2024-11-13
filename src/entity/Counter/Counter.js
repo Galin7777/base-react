@@ -1,5 +1,5 @@
 import classes from './Counter.module.scss';
-import { usePhotos } from 'shared/hooks';
+import { usePhotosStore } from 'shared/hooks';
 
 /**
  * @typedef {import('./types').CounterProps} CounterProps
@@ -12,7 +12,7 @@ import { usePhotos } from 'shared/hooks';
  */
 
 export const Counter = ({ count, setCount, name }) => {
-  const photosStore = usePhotos();
+  const photosStore = usePhotosStore();
 
   const newMinCount = count <= 0;
   const newMaxCount = count >= 9;

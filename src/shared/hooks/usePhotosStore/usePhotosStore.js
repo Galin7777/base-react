@@ -4,10 +4,10 @@ import { API_BASE_URL } from 'shared';
 /**
  * @typedef {import('./types').PhotoStateCreator} StateCreator
  * @typedef {import('./types').SetterCallback} Setter
- * @typedef {import('./types').PhotoState } State
+ * @typedef {import('./types').PhotoStore } State
  */
 
-export const usePhotos = create(/** @type {StateCreator} */(set) => ({
+export const usePhotosStore = create(/** @type {StateCreator} */(set) => ({
   /* State for count */
   photoCount: 0,
   setPhotoCount: (photoCount) => set(/** @type {Setter}*/(state) => ({ ...state, photoCount })),

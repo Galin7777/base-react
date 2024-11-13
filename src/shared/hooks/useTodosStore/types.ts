@@ -5,7 +5,7 @@ export type TodoFromAPI = {
   completed: boolean;
 };
 
-export type TodoState = {
+export type TodosStore = {
    /* State for count */
    todoCount: number;
    setTodoCount: (todoCount: number) => void;
@@ -17,4 +17,4 @@ export type TodoState = {
   resetTodos: () => void;
 };
 
-export type TodoStateCreator = (set: Function) => TodoState;
+export type TodoStateCreator = (set: Function) => TodosStore;
