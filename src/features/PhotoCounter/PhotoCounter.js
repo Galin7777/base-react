@@ -1,5 +1,5 @@
+import { usePhotosStore } from 'shared/hooks';
 import { Counter } from 'entity';
-import { usePhotos } from 'shared/hooks';
 
 /**
  * @typedef {import('./types').PhotoCounterProps} Props
@@ -12,12 +12,15 @@ import { usePhotos } from 'shared/hooks';
  */
 
 export const PhotoCounter = (props) => {
-  const photoState = usePhotos();
+  const photoStore = usePhotosStore();
 
   return (
     <Counter name={'Photos count'}
-      count={photoState.photoCount}
-      setCount={photoState.setPhotoCount}
+      count={photoStore.photoCount}
+      setCount={photoStore.setPhotoCount}
+      minCount={1}
+      maxCount={12}
+      isDisabled={photoStore.isPhotosLoading}
     />
   );
 };

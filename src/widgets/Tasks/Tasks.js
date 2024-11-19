@@ -1,27 +1,31 @@
 import classes from './Tasks.module.scss';
 import { useEffect } from 'react';
-import { TodoCounter, Todo } from 'features';
-import { useTodo } from 'shared/hooks';
+import { TodoCounter } from 'features';
+import { Todo } from 'features';
+import { useTodosStore } from 'shared/hooks';
+import { Preloader } from 'shared/ui';
 
 /**
  * @function Tasks
  * @returns {JSX.Element}
  */
 
-export const Tasks = () => {
-  const todoState = useTodo();
+export const Tasks = (props) => {
+  const todoStore = useTodosStore();
 
   useEffect(() => {
-    const { todoCount } = todoState;
-    if (!todoState.todoCount) return;
+    const { todoCount } = todoStore;
+    if (!todoStore.todoCount) return;
     console.log({ todoCount });
-    todoState.getTodos(todoState.todoCount);
-  }, [todoState.todoCount]);
+    todoStore.getTodos(todoStore.todoCount);
+  }, [todoStore.todoCount]);
 
   return (
     <div className={classes.tasks}>
+      {/* <p>{props.nam}</p> */}
+      <Preloader isActive={todoStore.isTodosLoading} />
       <TodoCounter name={'Todo count'}/>
-      <Todo todos={todoState.todos} />
+      <Todo todos={todoStore.todos} />
     </div>
   );
 };

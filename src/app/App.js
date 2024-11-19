@@ -1,7 +1,14 @@
 import classes from './App.module.scss';
 import { useEffect } from 'react';
-import { Gallery, Tasks } from 'widgets';
-import { usePhotos, useTodo } from 'shared/hooks';
+import { BrowserRouter } from 'react-router-dom';
+import { Routes } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { usePhotosStore } from 'shared/hooks';
+import { useTodosStore } from 'shared/hooks';
+import { HomePage } from 'pages/HomePage/HomePage';
+import { PhotoPage } from 'pages/PhotoPage';
+import { TodoPage } from 'pages/TodoPage';
 
 /**
  * @typedef {import('./types').AppProps} AppProps
@@ -15,22 +22,26 @@ import { usePhotos, useTodo } from 'shared/hooks';
 
 export const App = (props) => {
   const defaultCount = 4;
-  const photoState = usePhotos();
-  const todosState = useTodo();
+  const photoStore = usePhotosStore();
+  const todoStore = useTodosStore();
 
   useEffect(() => {
-    photoState.setPhotoCount(defaultCount);
-  }, []);
-
-  useEffect(() => {
-    todosState.setTodoCount(defaultCount);
+    photoStore.setPhotoCount(defaultCount);
+    todoStore.setTodoCount(defaultCount);
   }, []);
 
   return (
-    <div className={classes.app}>
-      <h3>{props.name}</h3>
-      <Gallery />
-      <Tasks />
-    </div>
+    <BrowserRouter>
+      <div className={classes.app}>
+        <h3>
+          <Link to={'/'}>{props.name}</Link>
+        </h3>
+        <Routes>
+          <Route path={'/'} element={<HomePage />} />
+          <Route path={'/photo/:photoId'} element={<PhotoPage />} />
+          <Route path={'/todo/:todoId'} element={<TodoPage />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 };

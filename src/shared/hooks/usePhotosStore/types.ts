@@ -6,7 +6,7 @@ export type PhotoFromAPI = {
   thumbnailUrl: string;
 };
 
-export type PhotoState = {
+export type PhotoStore = {
   /* State for count */
   photoCount: number;
   setPhotoCount: (photoCount: number) => void;
@@ -16,7 +16,8 @@ export type PhotoState = {
   photosErrorMessage: string;
   getPhotos: (count: number) => void;
   resetPhotos: () => void;
+  getPhotoById: (id: number) => PhotoFromAPI | undefined;
 };
 
-export type PhotoStateCreator = (set: Function) => PhotoState;
-export type SetterCallback = (state: PhotoState) => PhotoState;
+export type PhotoStateCreator = (set: Function) => PhotoStore;
+export type SetterCallback = (state: PhotoStore) => PhotoStore;

@@ -3,10 +3,10 @@ import { API_BASE_URL } from 'shared';
 
 /**
  * @typedef {import('./types').TodoStateCreator} StateCreator
- * @typedef {import('./types').TodoState} State
+ * @typedef {import('./types').TodosStore} State
  */
 
-export const useTodo = create(/** @type {StateCreator} */(set) => ({
+export const useTodosStore = create(/** @type {StateCreator} */(set) => ({
   /* State for count */
   todoCount: 1,
   setTodoCount: (todoCount) => set((/** @type {State} */state) => ({ ...state, todoCount })),
