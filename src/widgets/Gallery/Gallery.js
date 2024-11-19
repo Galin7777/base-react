@@ -1,7 +1,9 @@
 import classes from './Gallery.module.scss';
 import { useEffect } from 'react';
-import { PhotoCounter, Photos } from 'features';
+import { PhotoCounter } from 'features';
+import { Photos } from 'features';
 import { usePhotosStore } from 'shared/hooks';
+import { Preloader } from 'shared/ui';
 
 /**
  * @function Gallery
@@ -9,19 +11,20 @@ import { usePhotosStore } from 'shared/hooks';
  */
 
 export const Gallery = () => {
-  const photoState = usePhotosStore();
+  const photoStore = usePhotosStore();
 
   useEffect(() => {
-    const { photoCount } = photoState;
-    if (!photoState.photoCount) return;
+    const { photoCount } = photoStore;
+    if (!photoStore.photoCount) return;
     console.log({ photoCount });
-    photoState.getPhotos(photoState.photoCount);
-  }, [photoState.photoCount]);
+    photoStore.getPhotos(photoStore.photoCount);
+  }, [photoStore.photoCount]);
 
   return (
     <div className={classes.gallery}>
-      <PhotoCounter name={'Photo count'}/>
-      <Photos photos={photoState.photos} />
+      <PhotoCounter name={'Photo count'} />
+      <Photos photos={photoStore.photos} />
+      <Preloader isActive={photoStore.isPhotosLoading} />
     </div>
   );
 };

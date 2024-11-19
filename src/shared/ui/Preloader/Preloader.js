@@ -1,16 +1,21 @@
 import classes from './Preloader.module.scss';
 
 /**
- * @function Preloader
- * @returns {JSX.Element}
+ * @typedef {import ('./types').PreloaderProps} Props
  */
 
-export const Preloader = () => {
+/**
+ * @function Preloader
+ * @param {Props} props
+ * @returns {JSX.Element | null}
+ */
+
+export const Preloader = (props) => {
+  if (!props.isActive) return null;
+
   return (
     <div className={classes.preloader}>
       <div className={classes.loader}></div>
     </div>
   );
 };
-
-export default Preloader;

@@ -1,5 +1,4 @@
 import classes from './Counter.module.scss';
-import { usePhotosStore } from 'shared/hooks';
 
 /**
  * @typedef {import('./types').CounterProps} CounterProps
@@ -11,37 +10,38 @@ import { usePhotosStore } from 'shared/hooks';
  * @returns {JSX.Element}
  */
 
-export const Counter = ({ count, setCount, name }) => {
-  const photosStore = usePhotosStore();
+export const Counter = (props) => {
 
-  const newMinCount = count <= 0;
-  const newMaxCount = count >= 9;
+  const minCount = props.minCount ? props.minCount : 0;
+  const maxCount = props.maxCount ? props.maxCount : 10;
+  const isMinCount = props.count <= minCount;
+  const isMaxCount = props.count >= maxCount;
 
   const handleAddCount = () => {
-    if (newMaxCount) return;
-    setCount(count + 1);
+    if (isMaxCount) return;
+    props.setCount(props.count + 1);
   };
 
   const handleReduceCount = () => {
-    if (newMinCount) return;
-    setCount(count - 1);
+    if (isMinCount) return;
+    props.setCount(props.count - 1);
   };
 
   return (
     <div className={classes.counter}>
       {/* Name */}
-      <h1>{name}</h1>
+      <h1>{props.name}</h1>
       <div>
         {/* Minus */}
         <button className={classes.button}
-          disabled={newMinCount}
+          disabled={isMinCount || props.isDisabled}
           onClick={handleReduceCount}
         >
           minus
         </button>
         {/* Plus */}
         <button className={classes.button}
-          disabled={newMaxCount}
+          disabled={isMaxCount || props.isDisabled}
           onClick={handleAddCount}
         >
           plus
@@ -50,12 +50,12 @@ export const Counter = ({ count, setCount, name }) => {
       {/* Reset */}
       <p>
         <button className={classes.button}
-          onClick={() => setCount(1)}
+          onClick={() => props.setCount(minCount)}
         >
           reset
         </button>
       </p>
-      <p>Counter:{count}</p>
+      <p>Counter:{props.count}</p>
     </div>
   );
 };

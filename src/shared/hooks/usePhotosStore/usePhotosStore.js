@@ -7,7 +7,7 @@ import { API_BASE_URL } from 'shared';
  * @typedef {import('./types').PhotoStore } State
  */
 
-export const usePhotosStore = create(/** @type {StateCreator} */(set) => ({
+export const usePhotosStore = create(/** @type {StateCreator} */(set, get) => ({
   /* State for count */
   photoCount: 0,
   setPhotoCount: (photoCount) => set(/** @type {Setter}*/(state) => ({ ...state, photoCount })),
@@ -15,6 +15,12 @@ export const usePhotosStore = create(/** @type {StateCreator} */(set) => ({
   photos: [],
   isPhotosLoading: false,
   photosErrorMessage: '',
+
+  getPhotoById: (id) => {
+    const { photos } = get();
+    return photos.find((photo) => photo.id === id);
+  },
+
   getPhotos: async (count) => {
     try {
       set(/** @type {Setter}*/(state) => ({ ...state, isPhotosLoading: true }));

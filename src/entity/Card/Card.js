@@ -1,7 +1,6 @@
 import classes from './Card.module.scss';
-import { getRandomColor } from '../../shared/utils/getRandomColor';
-import { Preloader } from '../../shared/ui/Preloader';
-import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { getRandomColor } from 'shared/utils/getRandomColor';
 
 /**
  * @typedef {import ('./types').CardProps} CardProps
@@ -14,23 +13,13 @@ import { useState, useEffect } from 'react';
  */
 
 export const Card = (props) => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Здесь можно установить задержку для имитации загрузки, например, данных из API
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000); // 1 секунда задержки
-
-    return () => clearTimeout(timer);
-  }, []);
+  const page = (props.image && 'photo') || (props.name && 'todo');
+  const endPoint = `/${page}/${props.id}`;
 
   return (
-    <li className={classes.Card} style={{ background: getRandomColor() }}>
-      {isLoading ? (
-        <Preloader />
-      ) : (
-        <>
+    <>
+      <Link to={endPoint}>
+        <li className={classes.Card} style={{ background: getRandomColor() }}>
           {/* name */}
           {props.name && (
             <h2 className={classes.name}>
@@ -39,7 +28,10 @@ export const Card = (props) => {
           )}
           {/* image */}
           {props.image && (
-            <img className={classes.image} src={props.image} alt={props.name} />
+            <img className={classes.image}
+              src={props.image}
+              alt={props.name}
+            />
           )}
           {/* text */}
           {props.text && (
@@ -47,8 +39,8 @@ export const Card = (props) => {
               {props.text}
             </p>
           )}
-        </>
-      )}
-    </li>
+        </li>
+      </Link>
+    </>
   );
 };

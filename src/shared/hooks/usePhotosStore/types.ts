@@ -16,6 +16,7 @@ export type PhotoStore = {
   photosErrorMessage: string;
   getPhotos: (count: number) => void;
   resetPhotos: () => void;
+  getPhotoById: (id: number) => PhotoFromAPI | undefined;
 };
 
 export type PhotoStateCreator = (set: Function) => PhotoStore;

@@ -12,12 +12,15 @@ import { useTodosStore } from 'shared/hooks';
  */
 
 export const TodoCounter = (props) => {
-  const todoState = useTodosStore();
+  const todoStore = useTodosStore();
 
   return (
     <Counter name={'Todo count'}
-      count={todoState.todoCount}
-      setCount={todoState.setTodoCount}
+      count={todoStore.todoCount}
+      setCount={todoStore.setTodoCount}
+      minCount={1}
+      maxCount={10}
+      isDisabled={todoStore.isTodosLoading}
     />
   );
 };

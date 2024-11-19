@@ -1,1 +1,3 @@
-export type PreloaderProps = {};
+export type PreloaderProps = {
+  isActive: boolean;
+};
