@@ -1,8 +1,14 @@
-import { useEffect, useState } from 'react';
 import classes from './App.module.scss';
-import { Gallery, Tasks } from 'widgets';
-import { usePhotosStore, useTodosStore } from 'shared/hooks';
-import { Preloader } from '../shared/ui/Preloader';
+import { useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { Routes } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { usePhotosStore } from 'shared/hooks';
+import { useTodosStore } from 'shared/hooks';
+import { HomePage } from 'pages/HomePage/HomePage';
+import { PhotoPage } from 'pages/PhotoPage';
+import { TodoPage } from 'pages/TodoPage';
 
 /**
  * @typedef {import('./types').AppProps} AppProps
@@ -16,35 +22,26 @@ import { Preloader } from '../shared/ui/Preloader';
 
 export const App = (props) => {
   const defaultCount = 4;
-  const photoState = usePhotosStore();
-  const todosState = useTodosStore();
-  const [isLoading, setIsLoading] = useState(true);
+  const photoStore = usePhotosStore();
+  const todoStore = useTodosStore();
 
   useEffect(() => {
-    const loadData = async () => {
-      // Устанавливаем количество фотографий и задач
-      await Promise.all([
-        photoState.setPhotoCount(defaultCount),
-        todosState.setTodoCount(defaultCount),
-      ]);
-
-      setIsLoading(false); // Скрываем прелоудер после загрузки
-    };
-
-    loadData();
-  }, []); // Пустой массив зависимостей, чтобы эффект выполнялся только один раз при монтировании
+    photoStore.setPhotoCount(defaultCount);
+    todoStore.setTodoCount(defaultCount);
+  }, []);
 
   return (
-    <div className={classes.app}>
-      {isLoading ? (
-        <Preloader />
-      ) : (
-        <>
-          <h3>{props.name}</h3>
-          <Gallery />
-          <Tasks />
-        </>
-      )}
-    </div>
+    <BrowserRouter>
+      <div className={classes.app}>
+        <h3>
+          <Link to={'/'}>{props.name}</Link>
+        </h3>
+        <Routes>
+          <Route path={'/'} element={<HomePage />} />
+          <Route path={'/photo/:photoId'} element={<PhotoPage />} />
+          <Route path={'/todo/:todoId'} element={<TodoPage />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 };
