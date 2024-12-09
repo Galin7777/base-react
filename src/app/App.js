@@ -6,9 +6,12 @@ import { Route } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { usePhotosStore } from 'shared/hooks';
 import { useTodosStore } from 'shared/hooks';
-import { HomePage } from 'pages/HomePage/HomePage';
-import { PhotoPage } from 'pages/PhotoPage';
-import { TodoPage } from 'pages/TodoPage';
+import { HomePage } from 'pages';
+import { PhotoPage } from 'pages';
+import { TodoPage } from 'pages';
+import { PhotosPage } from 'pages';
+import { TodosPage } from 'pages';
+import { Header } from 'widgets';
 
 /**
  * @typedef {import('./types').AppProps} AppProps
@@ -33,11 +36,11 @@ export const App = (props) => {
   return (
     <BrowserRouter>
       <div className={classes.app}>
-        <h3>
-          <Link to={'/'}>{props.name}</Link>
-        </h3>
+        <Header />
         <Routes>
           <Route path={'/'} element={<HomePage />} />
+          <Route path={'/photos'} element={<PhotosPage />} />
+          <Route path={'/todos'} element={<TodosPage />} />
           <Route path={'/photo/:photoId'} element={<PhotoPage />} />
           <Route path={'/todo/:todoId'} element={<TodoPage />} />
         </Routes>

@@ -11,7 +11,6 @@ export const PhotoPage = () => {
   const photosStore = usePhotosStore();
   const photo = photosStore.photos
     .find((photo) => photo.id === Number(params.photoId));
-
   if (!photo) return <div>Photo not found or loading</div>;
 
   return (

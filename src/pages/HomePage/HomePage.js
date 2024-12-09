@@ -1,5 +1,5 @@
-import { Gallery } from 'widgets';
-import { Tasks } from 'widgets';
+import { defaultBannerURL } from 'shared/assets';
+import classes from './HomePage.module.scss';
 
 /**
  * @function HomePage
@@ -7,10 +7,10 @@ import { Tasks } from 'widgets';
  */
 
 export const HomePage = () => {
+
   return (
-    <>
-      <Gallery />
-      <Tasks />
-    </>
+    <div className={classes.banner}>
+      <img src={defaultBannerURL} />
+    </div>
   );
 };
