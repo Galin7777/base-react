@@ -1,5 +1,5 @@
 import { Counter } from 'entity';
-import { useTodosStore } from 'shared/hooks';
+import { useTodosStore } from 'shared/stor';
 
 /**
  * @typedef {import('./types').TodoCounterProps} Props

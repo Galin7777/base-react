@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useTodosStore } from 'shared/hooks';
+import { useTodosStore } from 'shared/stor';
 
 /**
  *@function TodoPage

@@ -2,7 +2,7 @@ import classes from './Tasks.module.scss';
 import { useEffect } from 'react';
 import { TodoCounter } from 'features';
 import { Todo } from 'features';
-import { useTodosStore } from 'shared/hooks';
+import { useTodosStore } from 'shared/stor';
 import { Preloader } from 'shared/ui';
 
 /**
