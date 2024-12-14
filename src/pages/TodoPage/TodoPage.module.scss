@@ -1,0 +1,28 @@
+.todo-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Центрирование по высоте */
+  background-color: #2c2c2c; /* Цвет фона страницы */
+  color: white;
+}
+
+.todo-page__card {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px; /* Прямоугольная форма с плавными углами */
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Лёгкая тень */
+}
+
+.todo-page__title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.todo-page__description {
+  font-size: 16px;
+  margin-top: 10px;
+}
