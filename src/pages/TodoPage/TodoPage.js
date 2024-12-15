@@ -1,5 +1,8 @@
+import classes from './TodoPage.module.scss';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTodosStore } from 'shared/stor';
+import { getRandomColor } from 'shared/utils';
 
 /**
  *@function TodoPage
@@ -7,15 +10,26 @@ import { useTodosStore } from 'shared/stor';
  */
 
 export const TodoPage = () => {
-  const { todoId } = useParams();
+  const params = useParams();
   const todosStore = useTodosStore();
-  const todo = todosStore.todos
-    .find((todo) => todo.id === Number(todoId));
 
-  if (!todo) return <div>Task not found or loading</div>;
+  if (!params.todoId) return <p>Invalid photo id</p>;
+
+  useEffect(() => {
+    if (!params.todoId) return;
+    todosStore.getTodoById(params.todoId);
+  }, []);
+
+  const todo = todosStore.todo;
+
+  if (!todo) return <p>Task not found</p>;
+
+  const background = getRandomColor();
 
   return (
-    <div>
+    <div className={classes.todoPage}
+      style={{ background }}
+    >
       <h2>{todo.title}</h2>
     </div>
   );

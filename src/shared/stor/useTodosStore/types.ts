@@ -6,15 +6,24 @@ export type TodoFromAPI = {
 };
 
 export type TodosStore = {
-   /* State for count */
+   /* State for todo count */
    todoCount: number;
    setTodoCount: (todoCount: number) => void;
-   /* State for todos */
+
+   /* State for todos store */
   todos: TodoFromAPI[] | [];
   isTodosLoading: boolean;
   todosErrorMessage: string;
   getTodos: (count: number) => void;
   resetTodos: () => void;
+
+  /* State for todo store */
+  isTodoLoading: boolean;
+  todo: TodoFromAPI | null;
+  todoErrorMessage: string;
+  getTodoById: (photoId: string) => void;
+  resetTodo: () => void;
 };
 
-export type TodoStateCreator = (set: Function) => TodosStore;
+export type SetterCallback = (store: TodosStore) => TodosStore;
+export type StoreCreator = (set: Function) => TodosStore;
