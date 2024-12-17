@@ -1,22 +1,37 @@
+import classes from './TodoPage.module.scss';
 import { useParams } from 'react-router-dom';
-import { useTodosStore } from 'shared/hooks';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useTodosStore } from 'shared/store';
+import { getRandomColor } from 'shared/utils';
 
 /**
- *@function TodoPage
+ * @function TodoPage
  * @returns {JSX.Element}
  */
 
 export const TodoPage = () => {
-  const { todoId } = useParams();
+  const [background, setBackground] = useState('');
+  const params = useParams();
   const todosStore = useTodosStore();
-  const todo = todosStore.todos
-    .find((todo) => todo.id === Number(todoId));
 
-  if (!todo) return <div>Task not found or loading</div>;
+  if (!params.todoId) return <p>Invalid task id</p>;
+
+  useEffect(() => {
+    if (!params.todoId) return;
+    todosStore.getTodoById(params.todoId);
+    const color = getRandomColor();
+    setBackground(color);
+  }, [params.todoId]);
+
+  const todo = todosStore.todo;
+
+  if (!todo) return <p>Task not found</p>;
 
   return (
-    <div>
-      <h2>{todo.title}</h2>
+    <div className={classes.todoPage} style={{ background }}>
+      <h2 className={classes.taskTitle}>{todo.title}</h2>
     </div>
   );
 };
+

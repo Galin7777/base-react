@@ -1,7 +1,7 @@
-.gallery {
+.banner {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 32px;
+  background-color: #f0f0f0;
+  margin: auto;
 }
