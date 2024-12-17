@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { usePhotosStore } from 'shared/stor';
+import { usePhotosStore } from 'shared/store';
 import { useEffect } from 'react';
 import { Preloader } from 'shared/ui';
 

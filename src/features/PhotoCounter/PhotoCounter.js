@@ -1,4 +1,4 @@
-import { usePhotosStore } from 'shared/stor';
+import { usePhotosStore } from 'shared/store';
 import { Counter } from 'entity';
 import { useEffect } from 'react';
 
