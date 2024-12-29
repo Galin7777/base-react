@@ -8,19 +8,16 @@ import { Card } from 'entity';
 /**
  * @function Photos
  * @param {PhotosProps} props
- * @returns {JSX.Element}
+ * @returns {import('react').JSX.Element}
  */
 
 export const Photos = (props) => {
   return (
     <ul className={classes.photos}>
       {props.photos.map((photo) => (
-        <Card key={photo.id}
-          id={photo.id}
-          name={photo.title}
-          image={photo.thumbnailUrl}
-        />
+        <Card.Photo key={photo.id} photo={photo} />
       ))}
     </ul>
   );
 };
+

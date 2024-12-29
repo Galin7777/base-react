@@ -15,6 +15,7 @@ export const Header = () => {
         <div className={classes.right}>
           <Link to="/photos">Photos</Link>
           <Link to="/todos">Todos</Link>
+          <Link to="/posts">Posts</Link>
         </div>
       </nav>
     </header>

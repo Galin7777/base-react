@@ -3,14 +3,16 @@ import { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
 import { Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import { usePhotosStore } from 'shared/store';
 import { useTodosStore } from 'shared/store';
+import { usePostsStore } from 'shared/store';
 import { HomePage } from 'pages';
 import { PhotoPage } from 'pages';
 import { TodoPage } from 'pages';
 import { PhotosPage } from 'pages';
 import { TodosPage } from 'pages';
+import { PostPage } from 'pages';
+import { PostsPage } from 'pages';
 import { Header } from 'widgets';
 
 /**
@@ -27,10 +29,12 @@ export const App = (props) => {
   const defaultCount = 4;
   const photoStore = usePhotosStore();
   const todoStore = useTodosStore();
+  const postStore = usePostsStore();
 
   useEffect(() => {
     photoStore.setPhotoCount(defaultCount);
     todoStore.setTodoCount(defaultCount);
+    postStore.setPostCount(defaultCount);
   }, []);
 
   return (
@@ -41,8 +45,10 @@ export const App = (props) => {
           <Route path={'/'} element={<HomePage />} />
           <Route path={'/photos'} element={<PhotosPage />} />
           <Route path={'/todos'} element={<TodosPage />} />
+          <Route path={'/posts'} element={<PostsPage />} />
           <Route path={'/photo/:photoId'} element={<PhotoPage />} />
           <Route path={'/todo/:todoId'} element={<TodoPage />} />
+          <Route path={'/post/:postId'} element={<PostPage />} />
         </Routes>
       </div>
     </BrowserRouter>
