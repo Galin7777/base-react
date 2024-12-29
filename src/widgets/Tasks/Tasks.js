@@ -7,7 +7,7 @@ import { Preloader } from 'shared/ui';
 
 /**
  * @function Tasks
- * @returns {JSX.Element}
+ * @returns {import('react').JSX.Element}
  */
 
 export const Tasks = (props) => {

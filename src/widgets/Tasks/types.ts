@@ -1,8 +1,8 @@
-import { TodoDetails } from '../../features/Todos/types';
+import { TodosDetails } from '../../features/Todos/types';
 
 export type TasksProps = {
   name?: string
-  todos: TodoDetails[];
+  todos: TodosDetails[];
   count: number;
   setCount: (count: number) => void;
 }
