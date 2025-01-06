@@ -4,6 +4,7 @@ import { partial } from 'shared/utils';
 
 /**
  * @typedef {import('./types').StoreCreator} StoreCreator
+ * @typedef {import('./types').PostForCreate} PostForCreate
  * @typedef {import('./types').SetterCallback} SetterCallback
  * @typedef {import('./types').PostStore} PostStore
  */
@@ -119,8 +120,50 @@ const resetPost = (set) => {
 };
 
 /**
+ * @function modal
+ * @param {Function} set
+ * @param {PostForCreate} postForCreate
+ * @returns {Promise<void>}
+ */
+
+const addPost = async (set, postForCreate) => {
+  try {
+    set(/** @type {SetterCallback} */(store) => ({
+      ...store,
+      isPostCreating: true,
+      isPostCreated: false,
+      postCreatingErrorMessage: '',
+    }));
+    const queryOpts = {
+      method: 'POST',
+      body: JSON.stringify(postForCreate),
+      headers: { 'Content-type': 'application/json' },
+    };
+    const queryURL = `${API_BASE_URL}/posts`;
+    const response = await fetch(queryURL, queryOpts);
+    if (!response.ok) throw new Error('Failed to create post');
+    const resData = await response.json();
+    set(/** @type {SetterCallback} */(store) => ({
+      ...store,
+      isPostCreating: false,
+      isPostCreated: Boolean(resData),
+      postCreatingErrorMessage: '',
+    }));
+  } catch (/** @type {*} */ error) {
+    const message = error.massage;
+    set(/** @type {SetterCallback} */(store) => ({
+      ...store,
+      isPostCreating: false,
+      isPostCreated: false,
+      postCreatingErrorMessage: message,
+    }));
+    // alert(message); модалка для обработки ошибки
+  }
+};
+
+/**
  * @function usePostsStore
- * @returns {PostStore}
+ * @returns {PostsStore} postsStore
  */
 
 export const usePostsStore = create(/** @type {StoreCreator} */(set) => ({
@@ -141,4 +184,10 @@ export const usePostsStore = create(/** @type {StoreCreator} */(set) => ({
   postErrorMessage: '',
   getPostById: partial(getPostById, set),
   resetPost: partial(resetPost, set),
+
+  /* Add post functionality */
+  isPostCreating: false,
+  isPostCreated: false,
+  postCreatingErrorMessage: '',
+  addPost: partial(addPost, set),
 }));
