@@ -1,7 +1,5 @@
 {
   "env": { "browser": true, "es2022": true, "node": true },
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
   "extends": [
     "eslint:recommended"
   ],
@@ -12,7 +10,13 @@
       "jsx": true
     }
   },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
   "rules": {
+    "react/react-in-jsx-scope": "off",
     "eqeqeq": ["error", "always"],
     "no-loop-func": ["error"],
     "no-self-compare": ["error"],

@@ -13,7 +13,7 @@ import { getRandomColor } from 'shared/utils/getRandomColor';
 /**
  * @function Photo
  * @param {PhotoProps} props
- * @returns
+ * @returns {JSX.Element}
  */
 
 export const Photo = (props) => {
