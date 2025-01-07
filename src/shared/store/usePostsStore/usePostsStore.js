@@ -127,13 +127,13 @@ const resetPost = (set) => {
 };
 
 /**
- * @function modal
+ * @function creatPost
  * @param {Function} set
  * @param {PostForCreate} postForCreate
  * @returns {Promise<void>}
  */
 
-const addPost = async (set, postForCreate) => {
+const creatPost = async (set, postForCreate) => {
   try {
     set(/** @type {SetterCallback} */(store) => ({
       ...store,
@@ -164,7 +164,6 @@ const addPost = async (set, postForCreate) => {
       isPostCreated: false,
       postCreatingErrorMessage: message,
     }));
-    // alert(message); модалка для обработки ошибки
   }
 };
 
@@ -178,23 +177,23 @@ export const usePostsStore = create(/** @type {StoreCreator} */(set) => ({
   postCount: 0,
   setPostCount: partial(setPostCount, set),
 
-  /* State for posts */
+  /* State for getting posts */
   isPostsLoading: false,
   posts: [],
   postsErrorMessage: '',
   getPosts: partial(getPosts, set),
   resetPosts: partial(resetPosts, set),
 
-  /* State for post store */
+  /*  State for getting post */
   isPostLoading: false,
   post: null,
   postErrorMessage: '',
   getPostById: partial(getPostById, set),
   resetPost: partial(resetPost, set),
 
-  /* Add post functionality */
+  /* State for create post */
   isPostCreating: false,
   isPostCreated: false,
   postCreatingErrorMessage: '',
-  addPost: partial(addPost, set),
+  creatPost: partial(creatPost, set),
 }));
