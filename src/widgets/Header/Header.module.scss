@@ -34,3 +34,9 @@ a {
   color: blue;
   font-weight: bold;
 }
+
+.disabled {
+  color: lightgray;
+  pointer-events: none;
+  cursor: not-allowed;
+}
