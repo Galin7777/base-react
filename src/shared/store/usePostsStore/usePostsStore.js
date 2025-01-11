@@ -46,6 +46,7 @@ const getPosts = async (set, count) => {
     const posts = Object.entries(data)
       .filter(([id, post]) => post !== null)
       .map(([id, post]) => ({ id, ...post }))
+      .sort((a, b) => b.timestamp - a.timestamp)
       .slice(0, count);
 
     set(/** @type {SetterCallback} */(store) => ({
@@ -141,6 +142,10 @@ const creatPost = async (set, postForCreate) => {
       isPostCreated: false,
       postCreatingErrorMessage: '',
     }));
+
+    const timestamp = Date.now(); // Добавляем временную метку
+    const formattedPost = { ...postForCreate, timestamp };
+
     const queryOpts = {
       method: 'POST',
       body: JSON.stringify(postForCreate),
@@ -148,12 +153,17 @@ const creatPost = async (set, postForCreate) => {
     };
     const queryURL = `${API_FIREBASE_URL}/posts.json/`;
     const response = await fetch(queryURL, queryOpts);
+
     if (!response.ok) throw new Error('Failed to create post');
+
     const resData = await response.json();
+
+    const newPost = { ...formattedPost, id: resData.name };
     set(/** @type {SetterCallback} */(store) => ({
       ...store,
       isPostCreating: false,
       isPostCreated: Boolean(resData),
+      posts: [newPost, ...store.posts],
       postCreatingErrorMessage: '',
     }));
   } catch (/** @type {*} */ error) {
