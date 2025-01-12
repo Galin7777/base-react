@@ -39,12 +39,13 @@ const getPosts = async (set, count) => {
       postsErrorMessage: '',
     }));
 
-    const response = await fetch(`${API_FIREBASE_URL}/posts.json/`);
+    const endPoint = `posts.json?orderBy="timestamp"&limitToLast=${count}`;
+    const response = await fetch(`${API_FIREBASE_URL}/${endPoint}`);
     if (!response.ok) throw new Error('Posts not received');
     const data = await response.json();
 
     const posts = Object.entries(data)
-      .filter(([id, post]) => post !== null)
+      .filter(([post]) => post !== null)
       .map(([id, post]) => ({ id, ...post }))
       .sort((a, b) => b.timestamp - a.timestamp)
       .slice(0, count);
@@ -159,6 +160,12 @@ const creatPost = async (set, postForCreate) => {
     const resData = await response.json();
 
     const newPost = { ...formattedPost, id: resData.name };
+
+    // Сохраняем новый пост в localStorage
+    const createdPosts = JSON.parse(localStorage.getItem('createdPosts') || '[]');
+    createdPosts.push(newPost);
+    localStorage.setItem('createdPosts', JSON.stringify(createdPosts));
+
     set(/** @type {SetterCallback} */(store) => ({
       ...store,
       isPostCreating: false,
