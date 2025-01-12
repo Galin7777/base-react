@@ -1,6 +1,6 @@
 import classes from './Tasks.module.scss';
 import { useEffect } from 'react';
-import { TodoCounter } from 'features';
+import { Counter } from 'features/Todo/Counter';
 import { Todos } from 'features';
 import { useTodosStore } from 'shared/store';
 import { Preloader } from 'shared/ui';
@@ -23,7 +23,7 @@ export const Tasks = (props) => {
   return (
     <div className={classes.tasks}>
       <Preloader isActive={todoStore.isTodosLoading} />
-      <TodoCounter name={'Todo count'}/>
+      <Counter name={'Todo count'}/>
       <Todos todos={todoStore.todos} />
     </div>
   );

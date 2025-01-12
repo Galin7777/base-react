@@ -1,3 +1,7 @@
+/**********************************************
+  Response types
+**********************************************/
+
 export type TodoFromAPI = {
   userId: number;
   id: number;
@@ -6,11 +10,11 @@ export type TodoFromAPI = {
 };
 
 export type TodosStore = {
-   /* State for todo count */
-   todoCount: number;
-   setTodoCount: (todoCount: number) => void;
+  /* State for todo count */
+  todoCount: number;
+  setTodoCount: (todoCount: number) => void;
 
-   /* State for todos store */
+  /* State for todos store */
   todos: TodoFromAPI[] | [];
   isTodosLoading: boolean;
   todosErrorMessage: string;
@@ -23,6 +27,12 @@ export type TodosStore = {
   todoErrorMessage: string;
   getTodoById: (photoId: string) => void;
   resetTodo: () => void;
+
+ /* State for creating todo store */
+  isTodoCreating: boolean;
+  isTodoCreated: boolean;
+  todoCreatingErrorMessage: string;
+  createTodo: (todoForCreate: { title: string; completed: boolean }) => Promise<void>;
 };
 
 export type SetterCallback = (store: TodosStore) => TodosStore;

@@ -1,6 +1,6 @@
 import classes from './Blog.module.scss';
 import { useEffect } from 'react';
-import { PostCounter } from 'features';
+import { Counter } from 'features/Post/Counter';
 import { Creator } from 'features';
 import { Card } from 'entity';
 import { usePostsStore } from 'shared/store';
@@ -24,9 +24,9 @@ export const Blog = () => {
   return (
     <div className={classes.blog}>
       {/* Counter */}
-      <PostCounter name={'Post count'} />
+      <Counter name={'Post count'} />
       {/* Posts */}
-      <Creator />
+      <Creator posts={[]} />
       <ul className={classes.posts}>
         {postStore.posts.map((post) => (
           <Card.Post key={post.id} post={post} />
