@@ -135,7 +135,7 @@ const creatTodo = async (set, TodoFromAPI) => {
       todoCreatingErrorMessage: '',
     }));
 
-    if (!TodoFromAPI || typeof TodoFromAPI.title !== 'string' || typeof TodoFromAPI.completed !== 'boolean') {
+    if (!TodoFromAPI || typeof TodoFromAPI.title !== 'string') {
       throw new Error('Invalid todo data provided');
     }
 

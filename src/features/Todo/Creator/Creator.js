@@ -15,18 +15,19 @@ import { useTodosStore } from 'shared/store';
 export const Creator = (props) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [newTodo, setNewTodo] = useState({ title: '', content: '' });
-  const { creatTodo, todoCount } = useTodosStore();
+  const { createTodo, todoCount } = useTodosStore();
 
   const handleCreator = () => {
     const formattedTodo = {
-      todoId: todoCount + 1,
       id: todoCount + 1,
       title: newTodo.title,
+      completed: false,
     };
 
-    creatTodo(formattedTodo);
+    createTodo(formattedTodo);
     setNewTodo({ title: '', content: '' });
     setModalOpen(false);
+    useTodosStore.getState().setTodoCount(todoCount + 1);
   };
 
   return (
