@@ -1,6 +1,6 @@
 import { PhotoFromAPI as PhotoDetails } from 'shared/store/usePhotosStore/types';
 import { TodoFromAPI as TodoDetails } from 'shared/store/useTodosStore/types';
-import { PostsFromAPI as PostDetails } from 'shared/store/usePostsStore/types';
+import { PostFromAPI as PostDetails } from 'shared/store/usePostsStore/types';
 import { JSX } from 'react';
 
 export type PhotoProps = {

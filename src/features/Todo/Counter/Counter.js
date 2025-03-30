@@ -1,4 +1,4 @@
-import { Counter } from 'entity';
+import { Counter as UiCounter } from 'entity';
 import { useTodosStore } from 'shared/store';
 
 /**
@@ -6,16 +6,16 @@ import { useTodosStore } from 'shared/store';
  */
 
 /**
- * @function TodoCounter
+ * @function Counter
  * @param {Props} props
  * @returns {JSX.Element}
  */
 
-export const TodoCounter = (props) => {
+export const Counter = (props) => {
   const todoStore = useTodosStore();
 
   return (
-    <Counter name={'Todo count'}
+    <UiCounter name={'Todo count'}
       count={todoStore.todoCount}
       setCount={todoStore.setTodoCount}
       minCount={1}

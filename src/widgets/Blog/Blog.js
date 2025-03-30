@@ -1,7 +1,8 @@
 import classes from './Blog.module.scss';
 import { useEffect } from 'react';
-import { PostCounter } from 'features';
-import { Posts } from 'features';
+import { Counter } from 'features/Post/Counter';
+import { Creator } from 'features';
+import { Card } from 'entity';
 import { usePostsStore } from 'shared/store';
 import { Preloader } from 'shared/ui';
 
@@ -22,8 +23,15 @@ export const Blog = () => {
 
   return (
     <div className={classes.blog}>
-      <PostCounter name={'Post count'} />
-      <Posts posts={postStore.posts} />
+      {/* Counter */}
+      <Counter name={'Post count'} />
+      {/* Posts */}
+      <Creator posts={[]} />
+      <ul className={classes.posts}>
+        {postStore.posts.map((post) => (
+          <Card.Post key={post.id} post={post} />
+        ))}
+      </ul>
       <Preloader isActive={postStore.isPostsLoading} />
     </div>
   );

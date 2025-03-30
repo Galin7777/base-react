@@ -3,9 +3,13 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #fff;
+  background-color: gray;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+
+a {
+    text-decoration: none;
+  }
 }
 
 .nav {
@@ -26,8 +30,13 @@
   gap: 1rem;
 }
 
-.right a, .left a {
-  text-decoration: none;
-  color: black;
-  transition: color 0.3s;
+.active {
+  color: blue;
+  font-weight: bold;
+}
+
+.disabled {
+  color: lightgray;
+  pointer-events: none;
+  cursor: not-allowed;
 }

@@ -2,7 +2,6 @@ import classes from './Card.module.scss';
 import { Link } from 'react-router-dom';
 import { getRandomColor } from 'shared/utils/getRandomColor';
 
-
 /**
  * @typedef {import('./types').PhotoProps} PhotoProps
  * @typedef {import('./types').TodoProps} TodoProps
@@ -13,7 +12,7 @@ import { getRandomColor } from 'shared/utils/getRandomColor';
 /**
  * @function Photo
  * @param {PhotoProps} props
- * @returns
+ * @returns {JSX.Element}
  */
 
 export const Photo = (props) => {

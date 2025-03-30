@@ -4,6 +4,7 @@ import { partial } from 'shared/utils';
 
 /**
  * @typedef {import('./types').TodosStore} TodoStore
+ * @typedef {import('./types').TodoFromAPI} TodoFromAPI
  * @typedef {import('./types').StoreCreator} StoreCreator
  * @typedef {import('./types').SetterCallback} SetterCallback
  */
@@ -119,6 +120,54 @@ const resetTodo = (set) => {
 };
 
 /**
+ * @function creatTodo
+ * @param {Function} set
+ * @param {TodoFromAPI} TodoFromAPI
+ * @returns {Promise<void>}
+ */
+
+const creatTodo = async (set, TodoFromAPI) => {
+  try {
+    set(/** @type {SetterCallback} */(store) => ({
+      ...store,
+      isTodoCreating: true,
+      isTodoCreated: false,
+      todoCreatingErrorMessage: '',
+    }));
+
+    if (!TodoFromAPI || typeof TodoFromAPI.title !== 'string') {
+      throw new Error('Invalid todo data provided');
+    }
+
+    const queryOpts = {
+      method: 'POST',
+      body: JSON.stringify(TodoFromAPI),
+      headers: { 'Content-type': 'application/json' },
+    };
+
+    const queryURL = `${API_BASE_URL}/todos`;
+    const response = await fetch(queryURL, queryOpts);
+    if (!response.ok) throw new Error('Failed to create todo');
+
+    const resData = await response.json();
+
+    set(/** @type {SetterCallback} */(store) => ({
+      ...store,
+      isTodoCreating: false,
+      isTodoCreated: Boolean(resData),
+      todoCreatingErrorMessage: '',
+    }));
+  } catch (/** @type {*} */ error) {
+    set(/** @type {SetterCallback} */(store) => ({
+      ...store,
+      isTodoCreating: false,
+      isTodoCreated: false,
+      todoCreatingErrorMessage: error.message || 'Unknown error occurred',
+    }));
+  }
+};
+
+/**
  * @function useTodosStore
  * @returns {TodosStore}
  */
@@ -141,4 +190,10 @@ export const useTodosStore = create(/** @type {StoreCreator} */(set) => ({
   todoErrorMessage: '',
   getTodoById: partial(getTodoById, set),
   resetTodo: partial(resetTodo, set),
+
+  /* State for creating todo store */
+  isTodoCreating: false,
+  isTodoCreated: false,
+  todoCreatingErrorMessage: '',
+  createTodo: partial(creatTodo, set),
 }));

@@ -1,28 +1,53 @@
-export type PostsFromAPI = {
+/**********************************************
+  Response types
+**********************************************/
+
+export type PostFromAPI = {
   postId: number;
   id: number;
   title: string;
   body: string;
 };
 
+/**********************************************
+  Post types
+**********************************************/
+
+export type PostForCreate = {
+  postId: number;
+  id: number;
+  title: string;
+  body: string;
+};
+
+/**********************************************
+  Store types
+**********************************************/
+
 export type PostStore = {
   /* Posts count state */
   postCount: number;
   setPostCount: (postCount: number) => void;
 
-  /* State for posts store */
+  /* State for getting posts */
   isPostsLoading: boolean;
-  posts: PostsFromAPI[] | [];
+  posts: PostFromAPI[];
   postsErrorMessage: string;
   getPosts: (count: number) => void;
   resetPosts: () => void;
 
-  /* State for post store */
+ /* State for getting post */
   isPostLoading: boolean;
-  post: PostsFromAPI | null;
+  post: PostFromAPI | null;
   postErrorMessage: string;
   getPostById: (postId: string | number) => void;
   resetPost: () => void;
+
+  /* State for create post */
+  isPostCreating: boolean;
+  isPostCreated: boolean;
+  postCreatingErrorMessage: string;
+  creatPost: (postData: PostFromAPI) => void;
 };
 
 export type SetterCallback = (store: PostStore) => PostStore;
